@@ -75,6 +75,9 @@ def stripper(junk_list):
                 prereqs = re.findall(r"([A-Z]{4}[0-9]{4})", prereq_str)
                 #print("prereq: ",prereqs)
 
+        else:
+            prereqs = []
+
         #get prohibitions
         if " N " in unit:
 
@@ -92,11 +95,17 @@ def stripper(junk_list):
                 prohibitions = re.findall(r"([A-Z]{4}[0-9]{4})", x[1])
                 #print("prohib: ", prohibitions)
 
+        else:
+            prohibitions = []
+
         if " C " in unit:
 
             final_split = unit.split(" C ")
             coreq = re.findall(r"([A-Z]{4}[0-9]{4})", final_split[1])
             #print("coreq: ", coreq)
+
+        else:
+            coreq = []
 
 
         uos.append(uos_code)
