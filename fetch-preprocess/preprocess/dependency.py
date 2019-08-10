@@ -7,6 +7,8 @@ class Dependency:
         elif type(prereqs) == list:
             if len(prereqs) == 0:
                 return None
+            if len(prereqs) == 1:
+                return courses[prereqs[0]]
             else:
                 logic = prereqs[0]
                 temp = Dependency()
@@ -104,16 +106,16 @@ class Course(Dependency):
     def __repr__(self):
         return self.code
 
+# TODO fix this up :(
 def unpack(ls):
-    ret = []
-
-    for temp in ls[1:]:
-        if type(temp) == list:
-            ret.extend(unpack(temp))
+    if type(ls) == list:
+        if len(ls) == 0:
+            return []
+        elif len(ls) == 1:
+            return ls
         else:
-            ret.append(temp)
-
-    return ret
+            return (unpack(ls[1]) + unpack(ls[2]))
+    return [ls]
 
 def create_courses(course_json):
     all_course_names = []
