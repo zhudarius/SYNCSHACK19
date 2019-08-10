@@ -53,6 +53,8 @@ def stripper(junk_list):
         #get uos_code
         uos_code = unit[:8]
         #print("uos_code:",uos_code)
+        if uos_code = "DATA2002" or uos_code = "DATA2902":
+            continue
 
         #get credit points
         unit = unit[8:]
@@ -162,4 +164,4 @@ def stripper(junk_list):
 #uos_list = [('INFO1110',[],[]),('COMP2123',['INFO1105','INFO1905'],['INFO1110']),('ISYS2120',["INFO2120","INFO2820","COMP5138"],["INFO1113"]),('INFO3333',[],['INFO1111'])]
 #create_json(uos_list)
 
-#stripper(['COMP2017 \n6 P  INFO1113 or slakdfjlkaj or aslkrfjkljfsd N  COMP2129 '])
+#stripper(['COMP2017 \n6 P  INFO1113(except MATH1XX5) or slakdfjlkaj or aslkrfjkljfsd N  COMP2129 '])
