@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from converter import stripper
 import pandas as pd
 import re
+import time
 
 class ParserInterface:
     def __init__(self, course_link):
@@ -48,6 +49,7 @@ class Parser_USYD(ParserInterface):
            print(unit)
         #print(self.unit_list)
 
+# Can be extensible to UNSW
 class Parser_UNSW(ParserInterface):
     def __init__(self, course_link):
         ParserInterface.__init__(self, course_link)
@@ -58,9 +60,21 @@ class Parser_UNSW(ParserInterface):
         self.content = self.driver.page_source
         self.soup = BeautifulSoup(self.content, features="lxml")
 
-        self.driver.find_element_by_xpath("//*[@id='subjectUndergraduate']/div/button").click()
-        self.driver.find_element_by_xpath("//*[@id='subjectUndergraduate']/div/button").click()
+        while(not (self.driver.find_element_by_xpath("//*[@id='subjectUndergraduate']/div/button").text == "No more Courses to show.")):
+            
+            self.driver.find_element_by_xpath("//*[@id='subjectUndergraduate']/div/button").click()
+            time.sleep(.300)
+            #    print('wow')
 
+        self.unit_html = self.soup.findAll('div', {'class':'a-browse-tile-content with-separator'})
+        #self.table_rows = [uos.split(" ")[1] for uos in self.unit_html]
+        
+        print(self.unit_html)
+
+        #
+        #self.driver.find_element_by_xpath("//*[@id='subjectUndergraduate']/div/button").click()
+
+        # while text is not No more courses to display
         
 
     def get_units(self):
@@ -78,7 +92,7 @@ parser_usyd = Parser_USYD("https://sydney.edu.au/handbooks/engineering/advanced_
 #parser.print_unformatted_unit_list()
 parser_usyd.get_units()
 
-parser_unsw = Parser_UNSW("https://www.handbook.unsw.edu.au/ComputerScience/browse?sa=91ce03204f0f5b00eeb3eb4f0310c782")
+#parser_unsw = Parser_UNSW("https://www.handbook.unsw.edu.au/ComputerScience/browse?sa=91ce03204f0f5b00eeb3eb4f0310c782")
 #parser.print_unformatted_unit_list()
 #parser_unsw.get_units()
 

@@ -63,7 +63,7 @@ def stripper(junk_list):
         if " P " in unit:
 
             if " C " in unit:
-                prereq_str = re.search(' P (.*) C', unit)
+                prereq_str = re.search(' P (.*) C ', unit)
                 #print(prereq_str.group(1))
                 prereqs = re.findall(r"([A-Z]{4}[0-9]{4})", prereq_str.group(1))
                 #print("prereq: ",prereqs)
