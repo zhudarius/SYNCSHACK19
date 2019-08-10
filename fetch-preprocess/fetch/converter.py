@@ -48,9 +48,3 @@ def stripper(junk_list):
         prereq = re.search(' A (.*)N', unit)
         print(prereq.group(1))
 
-
-
-#uos_list = [('INFO1110',[],[]),('COMP2123',['INFO1105','INFO1905'],['INFO1110']),('ISYS2120',["INFO2120","INFO2820","COMP5138"],["INFO1113"]),('INFO3333',[],['INFO1111'])]
-#create_json(uos_list)
-
-stripper(["COMP3308Introduction to Artificial Intelligence \n12 \xa0\xa0\n A Algorithms. Programming skills (e.g. Java, Python, C, C++, Matlab)  N COMP3608 \n\nSemester 1"])
