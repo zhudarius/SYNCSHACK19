@@ -53,7 +53,7 @@ def stripper(junk_list):
         #get uos_code
         uos_code = unit[:8]
         #print("uos_code:",uos_code)
-        if uos_code = "DATA2002" or uos_code = "DATA2902":
+        if uos_code == "DATA2002" or uos_code == "DATA2902" or uos_code == "DATA2901" or uos_code == "COMP3608" or uos_code == "ISYS3402" or uos_code == "INFO2222":
             continue
 
         #get credit points
@@ -115,7 +115,7 @@ def stripper(junk_list):
         else:
             preq = []
 
-        #get prohibitions
+        #get corequisites
         if " C " in unit:
 
             x = unit.split(" C ")
@@ -137,10 +137,12 @@ def stripper(junk_list):
         else:
             coreqq = []
 
+
+        #get prohibitions
         if " N " in unit:
 
             final_split = unit.split(" N ")
-            prohibitions = re.findall(r"[A-Z]{4}[0-9]{4}| AND | OR |\(|\)| and | or ", final_split[1])
+            prohibitions = re.findall(r"[A-Z]{4}[0-9]{4}", final_split[1])
             #print("prohibitions: ", prohibitions)
 
         else:
