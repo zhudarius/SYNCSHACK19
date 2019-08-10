@@ -137,7 +137,6 @@ def stripper(junk_list):
         else:
             coreqq = []
 
-
         #get prohibitions
         if " N " in unit:
 
