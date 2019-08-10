@@ -115,7 +115,7 @@ def stripper(junk_list):
         else:
             preq = []
 
-        #get prohibitions
+        #get corequisite
         if " C " in unit:
 
             x = unit.split(" C ")
@@ -136,11 +136,12 @@ def stripper(junk_list):
 
         else:
             coreqq = []
-
+        
+        #get prohibitions
         if " N " in unit:
 
             final_split = unit.split(" N ")
-            prohibitions = re.findall(r"[A-Z]{4}[0-9]{4}| AND | OR |\(|\)| and | or ", final_split[1])
+            prohibitions = re.findall(r"[A-Z]{4}[0-9]{4}", final_split[1])
             #print("prohibitions: ", prohibitions)
 
         else:
