@@ -18,14 +18,14 @@ class Dependency:
     def __init__(self):
         self.id = len(Dependency.nodes)
         Dependency.nodes[self.id] = self
-        
+
         self.necessary_for = []
         self.sufficient_for = []
 
     def add_children(self, logic, child_1, child_2):
         self.logic = logic
         self.children = (child_1, child_2)
-        self.children_id = (Dependency.nodes[child_1], Dependency.nodes[child_2])
+        self.children_id = (child_1.id, child_2.id)
 
         if self.logic.lower() == "and":
             child_1.necessary_for.append(self)
@@ -77,6 +77,8 @@ class Course(Dependency):
 
     # Things that prohibit you from taking courses
     def find_prohib(self, courses):
+        self.prohibitions = []
+
         for c in self.prohibition_ls:
             self.prohibitions.append(courses[c])
 
@@ -102,7 +104,13 @@ class Course(Dependency):
     def __repr__(self):
         return self.code
 
-def create_courses(darius_and_monicas_json):
+def create_courses(js):
+
+    courses = {}
+
+    for x in js:
+        courses[x["uos_code"]] = Course(x["uos_code"], x["prohibitions"])
+
     # (Use monica and darius's json)
 
     # courses = {"A": Course("A"),
@@ -112,19 +120,18 @@ def create_courses(darius_and_monicas_json):
     #         "E": Course("E", ["F"], ["and", "A", ["or", "B", "C"]]),
     #         "F": Course("F", [], "D"),}
 
-    courses = {"A": Course("A"),
-            "B": Course("B"),
-            "C": Course("C"),
-            "D": Course("D"),
-            "E": Course("E", ["D"]),
-            "F": Course("F", [], "E"),
-            "G": Course("G", [], ["and", "B", "C"]),
-            "H": Course("H", [], "C"),
+    courses = {"AAAA1111": Course("AAAA1111"),
+            "BBBB1111": Course("BBBB1111"),
+            "CCCC1111": Course("CCCC1111"),
+            "DDDD1111": Course("DDDD1111"),
+            "EEEE1111": Course("EEEE1111", ["DDDD1111"]),
+            "FFFF1111": Course("FFFF1111", [], "EEEE1111"),
+            "GGGG1111": Course("GGGG1111", [], ["and", "BBBB1111", "CCCC1111"]),
+            "HHHH1111": Course("HHHH1111", [], "CCCC1111"),
     }
 
     for c in courses.values():
         c.find_dependencies(courses)
-
-    print(Dependency.nodes)
+        c.find_prohib(courses)
 
     return courses
