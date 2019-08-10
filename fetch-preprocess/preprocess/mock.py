@@ -104,31 +104,40 @@ class Course(Dependency):
     def __repr__(self):
         return self.code
 
-def create_courses(js):
+def unpack(ls):
+    ret = []
+
+    for temp in ls[1:]:
+        if type(temp) == list:
+            ret.extend(unpack(temp))
+        else:
+            ret.append(temp)
+
+    return ret
+
+def create_courses(course_json):
+    all_course_names = []
+
+    for course in course_json:
+        all_course_names.append(course["uos_code"])
+        all_course_names.extend(course["prohibitions"])
+        all_course_names.extend(unpack(course["prereqs"]))
+    all_course_names = list(set(all_course_names))
+
+    prohib_dict = {}
+    prereq_dict = {}
+
+    for course_info in course_json:
+        uos = course_info["uos_code"]
+        prohib_dict[uos] = course_info["prohibitions"]
+        prereq_dict[uos] = course_info["prereqs"]
 
     courses = {}
-
-    for x in js:
-        courses[x["uos_code"]] = Course(x["uos_code"], x["prohibitions"])
-
-    # (Use monica and darius's json)
-
-    # courses = {"A": Course("A"),
-    #         "B": Course("B"),
-    #         "C": Course("C"),
-    #         "D": Course("D"),
-    #         "E": Course("E", ["F"], ["and", "A", ["or", "B", "C"]]),
-    #         "F": Course("F", [], "D"),}
-
-    courses = {"AAAA1111": Course("AAAA1111"),
-            "BBBB1111": Course("BBBB1111"),
-            "CCCC1111": Course("CCCC1111"),
-            "DDDD1111": Course("DDDD1111"),
-            "EEEE1111": Course("EEEE1111", ["DDDD1111"]),
-            "FFFF1111": Course("FFFF1111", [], "EEEE1111"),
-            "GGGG1111": Course("GGGG1111", [], ["and", "BBBB1111", "CCCC1111"]),
-            "HHHH1111": Course("HHHH1111", [], "CCCC1111"),
-    }
+    for course_name in all_course_names:
+        if course_name in prohib_dict:
+            courses[course_name] = Course(course_name, prohib_dict[course_name], prereq_dict[course_name])
+        else:
+            courses[course_name] = Course(course_name)
 
     for c in courses.values():
         c.find_dependencies(courses)

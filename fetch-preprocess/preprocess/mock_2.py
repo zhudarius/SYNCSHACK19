@@ -9,10 +9,9 @@ from flask_cors import CORS
 app = Flask(__name__)
 cors = CORS(app)
 
-# TODO give it a json file
 with open(sys.argv[1]) as f:
-    x = json.loads(f.readline())
-    courses = create_courses(x["units"])
+    json_file = json.loads(f.readline())
+    courses = create_courses(json_file["units"])
 
 #### Return a list of all nodes and edges in the graph
 # Nodes have the format {ID, display, colour}, where
@@ -109,7 +108,7 @@ if __name__ == "__main__":
         # print(*vals["edges"], sep='\n')
         # print()
 
-        vals = calculate_categories(["CCCC1111", "DDDD1111"])
+        vals = calculate_categories(["COMP2007"])
         print("Can take: \t\t{}".format(",".join(vals["Can take"])))
         print("Can potentially take: \t{}".format(",".join(vals["Can potentially take"])))
         print("Can never take: \t{}".format(",".join(vals["Can never take"])))
