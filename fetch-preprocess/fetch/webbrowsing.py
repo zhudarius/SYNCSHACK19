@@ -60,7 +60,7 @@ class Parser_UNSW(ParserInterface):
 
         self.unit_html = self.soup.find('table', {'class':'tabledata_blue'})
         self.table_rows = self.unit_html.findAll('tr')
-        driver.find_element_by_xpath("//*[@id="subjectUndergraduate"]/div/button")
+        driver.find_element_by_xpath("//*[@id=\"subjectUndergraduate\"]/div/button")
         
 
         for row in self.table_rows:
@@ -85,9 +85,9 @@ class Parser_UNSW(ParserInterface):
 
 parser_usyd = Parser_USYD("https://sydney.edu.au/handbooks/engineering/advanced_computing/advanced_computing_table.shtml")
 #parser.print_unformatted_unit_list()
-#parser_usyd.get_units()
+parser_usyd.get_units()
 
-parser_unsw = Parser_UNSW("https://www.handbook.unsw.edu.au/ComputerScience/browse?sa=91ce03204f0f5b00eeb3eb4f0310c782")
+#parser_unsw = Parser_UNSW("https://www.handbook.unsw.edu.au/ComputerScience/browse?sa=91ce03204f0f5b00eeb3eb4f0310c782")
 #parser.print_unformatted_unit_list()
 #parser_unsw.get_units()
 
