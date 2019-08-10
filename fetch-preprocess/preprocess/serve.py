@@ -63,16 +63,20 @@ def send_all():
 
 def calculate_categories(courses_taken):
     can_take_now = []
-    for code, course in courses.items():
+    for course in courses.values():
         if course.almost_satisfied(courses_taken) and not course.is_satisfied(courses_taken):
-            can_take_now.append(code)
+            can_take_now.append({"uos_code": course.code, "node_id": course.id})
 
     can_never_take = []
-    for code, course in courses.items():
+    for course in courses.values():
         if not course.can_satisfy(courses_taken) and not course.is_satisfied(courses_taken):
-            can_never_take.append(code)
+            can_never_take.append({"uos_code": course.code, "node_id": course.id})
 
-    can_potentially_take = list(x for x in courses.keys() if not x in (courses_taken + can_take_now + can_never_take))
+    can_potentially_take = []
+    remove = courses_taken + list(map(lambda x: x["uos_code"], can_take_now)) + list(map(lambda x: x["uos_code"], can_never_take))
+    for course in courses.values():
+        if not (course.code in remove):
+            can_potentially_take.append({"uos_code": course.code, "node_id": course.id})
 
     return {"Can take": can_take_now, "Can potentially take": can_potentially_take, "Can never take": can_never_take}
 
@@ -118,10 +122,10 @@ def calculate_necessary(courses_taken, desired_course):
         return "cannot_take"
 
     if desired_course.pre_req == None:
-        return ""
+        return "course_has_no_prereqs"
 
     requirements = parse_requirements(desired_course.pre_req, courses_taken)
-    return requirements.__repr__() if requirements != None else ""
+    return requirements.__repr__() if requirements != None else "requirements_already_satisfied"
 
 @app.route('/must_take', methods=['POST'])
 def send_necessary():
@@ -132,7 +136,7 @@ def send_necessary():
     return calculate_necessary(courses, target), 200
 
 if __name__ == "__main__":
-    server = False
+    server = True
 
     if server:
         app.run(debug=True, port=5000, host='0.0.0.0')
@@ -154,22 +158,30 @@ if __name__ == "__main__":
         print()
 
         vals = calculate_categories(courses_taken)
-        print("You can currently take: {}\n".format(", ".join(vals["Can take"])))
-        print("In the future, you can potentially take: {}\n".format(", ".join(vals["Can potentially take"])))
-        print("You can never take: {}\n".format(", ".join(vals["Can never take"])))
+
+        can_take_courses = [x["uos_code"] for x in vals["Can take"]]
+        potentially_take_courses = [x["uos_code"] for x in vals["Can potentially take"]]
+        never_take_courses = [x["uos_code"] for x in vals["Can never take"]]
+
+        print("You can currently take: {}\n".format(", ".join(can_take_courses)))
+        print("In the future, you can potentially take: {}\n".format(", ".join(potentially_take_courses)))
+        print("You can never take: {}\n".format(", ".join(never_take_courses)))
 
         # ==== Calculate what other courses they need to do to be eligible for another course ====
 
-        target = "INFO2222"
+        targets = ["INFO2222", "COMP2017", "INFO1103", "INFO1105", "INFO1110"]
 
-        print("You've taken: {}".format(", ".join(courses_taken)))
-        print("If you want to take {}:".format(target))
-        units_to_take = calculate_necessary(courses_taken, target)
-        if units_to_take == 'already_completed':
-            print("You've already completed that course")
-        elif units_to_take == 'cannot_take':
-            print("You're prohibited from taking that course")
-        elif units_to_take == '':
-            print("You can already take that course")
-        else:
-            print("You should take {}".format(units_to_take))
+        for target in targets:
+            print("If you want to take {}:".format(target))
+            units_to_take = calculate_necessary(courses_taken, target)
+            if units_to_take == 'already_completed':
+                print("You've already completed this course")
+            elif units_to_take == 'cannot_take':
+                print("You're prohibited from taking this course")
+            elif units_to_take == 'course_has_no_prereqs':
+                print("This course has no prereqs")
+            elif units_to_take == 'requirements_already_satisfied':
+                print("You can already take this course")
+            else:
+                print("You should take {}".format(units_to_take))
+            print()
