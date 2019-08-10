@@ -58,18 +58,8 @@ class Parser_UNSW(ParserInterface):
         self.content = self.driver.page_source
         self.soup = BeautifulSoup(self.content, features="lxml")
 
-        self.unit_html = self.soup.find('table', {'class':'tabledata_blue'})
-        self.table_rows = self.unit_html.findAll('tr')
-        driver.find_element_by_xpath("//*[@id=\"subjectUndergraduate\"]/div/button")
+        self.driver.find_element_by_xpath("//*[@id='subjectUndergraduate']/div/button").click()
         
-
-        for row in self.table_rows:
-            self.unit_row.append(row.get_text().strip())
-
-        for row in self.unit_row:
-            if re.match(r"^([A-Z]{4}[0-9]{4})", row):
-                #print(row)
-                self.unit_list.append(row)
             
 
     def get_units(self):
@@ -85,9 +75,9 @@ class Parser_UNSW(ParserInterface):
 
 parser_usyd = Parser_USYD("https://sydney.edu.au/handbooks/engineering/advanced_computing/advanced_computing_table.shtml")
 #parser.print_unformatted_unit_list()
-parser_usyd.get_units()
+#parser_usyd.get_units()
 
-#parser_unsw = Parser_UNSW("https://www.handbook.unsw.edu.au/ComputerScience/browse?sa=91ce03204f0f5b00eeb3eb4f0310c782")
+parser_unsw = Parser_UNSW("https://www.handbook.unsw.edu.au/ComputerScience/browse?sa=91ce03204f0f5b00eeb3eb4f0310c782")
 #parser.print_unformatted_unit_list()
 #parser_unsw.get_units()
 
