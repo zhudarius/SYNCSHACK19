@@ -7,29 +7,43 @@ if __name__ == "__main__":
     # for c in courses.values():
     #     c.check()
 
+    #
+    # @app.route('/get_all', methods=['GET'])
+    # def send_all():
+    #     data_in = request.get_json()
+    #     return ""
+    #
+    # @app.route('/can_take', methods=['GET'])
+    # def send_sufficient():
+    #     data_in = request.get_json()
+    #     courses_taken = data_in['courses_taken']
+    #
+    #     can_take_now = []
+    #
+    #     for code, course in courses.items():
+    #         if course.is_satisfied(courses_taken) and not (code in courses_taken):
+    #             can_take_now.append(code)
+    #
+    #     return "{}".format(",".join(can_take_now))
+    #
+    # @app.route('/must_take', methods=['GET'])
+    # def send_necessary():
+    #     data_in = request.get_json()
+    #     return "USYD1234,HACK0000"
 
-    completed = [False] * len(courses)
 
-    @app.route('/get_all', methods=['GET'])
-    def send_all():
-        data_in = request.get_json()
-        return ""
+    courses_taken = ["C", "D"]
 
-    @app.route('/can_take', methods=['GET'])
-    def send_sufficient():
-        data_in = request.get_json()
-        course_codes = data_in['courses_taken']
+    can_take_now = []
 
-        can_take = []
-        potentially_take = []
+    for code, course in courses.items():
+        if course.is_satisfied(courses_taken) and not (code in courses_taken):
+            can_take_now.append(code)
 
-        for c in course_codes:
+    can_never_take = []
+    for code, course in courses.items():
+        if not course.can_satisfy(courses_taken) and not (code in courses_taken):
+            can_never_take.append(code)
 
-
-
-        return "TEST1234,SYNC0000"
-
-    @app.route('/must_take', methods=['GET'])
-    def send_necessary():
-        data_in = request.get_json()
-        return "USYD1234,HACK0000"
+    print("{}".format(",".join(can_take_now)))
+    print("{}".format(",".join(can_never_take)))
