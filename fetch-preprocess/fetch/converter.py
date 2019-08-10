@@ -87,13 +87,21 @@ def stripper(junk_list):
                 #print(prereq_str.group(1))
                 prereqs = re.findall(r"[A-Z]{4}[0-9]{4}| AND | OR |\(|\)| and | or ", prereq_str.group(1))
                 #print("prereq: ",prereqs)
-                preq = and_or_trigger(prereqs)
+                tester = re.findall(r"[A-Z]{4}[0-9]{4}",prereq_str.group(1))
+                if len(tester) == 1:
+                    preq = tester
+                else:
+                    preq = and_or_trigger(prereqs)
 
             elif " N " in unit:
                 prereq_str = re.search(' P (.*) N ', unit)
                 prereqs = re.findall(r"[A-Z]{4}[0-9]{4}| AND | OR |\(|\)| and | or ", prereq_str.group(1))
                 #print("prereq: ",prereqs)
-                preq = and_or_trigger(prereqs)
+                tester = re.findall(r"[A-Z]{4}[0-9]{4}",prereq_str.group(1))
+                if len(tester) == 1:
+                    preq = tester
+                else:
+                    preq = and_or_trigger(prereqs)
 
             else:
                 prereq_str = unit
@@ -154,4 +162,4 @@ def stripper(junk_list):
 #uos_list = [('INFO1110',[],[]),('COMP2123',['INFO1105','INFO1905'],['INFO1110']),('ISYS2120',["INFO2120","INFO2820","COMP5138"],["INFO1113"]),('INFO3333',[],['INFO1111'])]
 #create_json(uos_list)
 
-#stripper(['COMP2017 \n6 P  INFO1113 OR INFO1105 OR INFO1905 OR INFO1103 C COMP2123 OR COMP2823 OR INFO1105 OR INFO1905 N  COMP2129 ','COMP3927Algorithm Design (Adv) \n6 \xa0\xa0\n A MATH1004 OR MATH1904 OR MATH1064  P COMP2123 OR COMP2823 OR INFO1105 OR INFO1905  N COMP2007 OR COMP2907 OR COMP3027 \nNote: Department permission required for enrolment\nSemester 1', 'COMP3988Computer Science Project (Advanced) \n6 \xa0\xa0\n P [(COMP2123 OR COMP2823) AND COMP2017 AND (COMP2022 OR COMP2922) with Distinction level results in at least one of these units.]  N INFO3600 OR COMP3615 OR COMP3600 OR COMP3888 \nNote: Department permission required for enrolment\nSemester 2', 'DATA3406Human-in-the-Loop Data Analytics \n6 \xa0\xa0\n\xa0\nSemester 2', 'DATA3888Data Science Capstone \n6 \xa0\xa0\n P DATA2001 or DATA2901 or DATA2002 or DATA2902 or STAT2912 or STAT2012 \n\nSemester 2'])
+#stripper(['COMP2017 \n6 P  INFO1113 or slakdfjlkaj or aslkrfjkljfsd N  COMP2129 '])
