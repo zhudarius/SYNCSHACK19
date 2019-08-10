@@ -1,7 +1,7 @@
 from selenium import webdriver
 from bs4 import BeautifulSoup
 
-#import converter
+from converter import stripper
 import pandas as pd
 import re
 
@@ -32,12 +32,23 @@ class Parser:
                 #print(row)
                 self.unit_list.append(row)
             
-            print(self.unit_row)
+            
+        #print(self.unit_list)
+
+    def get_units(self):
+        #stripper(self.unit_list)
+        pass
+
+    def print_unformatted_unit_list(self):
+        for unit in self.unit_list:
+            print(unit)
 
 
 parser = Parser("https://sydney.edu.au/handbooks/engineering/advanced_computing/advanced_computing_table.shtml")
+parser.print_unformatted_unit_list()
 
-#print(trash)
+
+print("trash")
 
 
 
