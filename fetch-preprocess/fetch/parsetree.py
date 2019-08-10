@@ -2,6 +2,10 @@
 # This library was non-functional in its original state (did not compile with Python 2.7,
 #  nor 3)
 from logicparser import *
+def generateParseTree(expression):
+    
+    tree, vars_order = parse(expression)
+    print(tree)
+    return tree
 
-tree, vars_order = parse('INFO1113|INFO1105|INFO1905|INFO1103')
-print(tree)
+generateParseTree('(COMP2123|COMP2823)&COMP2017&(COMP2022|COMP2922)')
