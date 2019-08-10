@@ -25,9 +25,11 @@ def stripper(junk_list):
 
     for unit in junk_list:
 
+        #get uos_code
         uos_code = unit[:8]
         print("uos_code:",uos_code)
 
+        #get credit points
         unit = unit[8:]
 
         i = 0
@@ -44,13 +46,39 @@ def stripper(junk_list):
 
         print("credit points:", cp)
 
+        #get prereqs
         unit = unit[i:]
-        prereq = re.search(' A (.*)N', unit)
-        print(prereq.group(1))
+
+        if " P " in unit:
+            if " N " in unit:
+                prereq_str = re.search(' P (.*)N', unit)
+                #print(prereq_str.group(1))
+                r1 = re.findall(r"([A-Z]{4}[0-9]{4})", prereq_str.group(1))
+                print(r1)
+
+            elif " C " in unit:
+                prereq_str = re.search(' P (.*)C', unit)
+                print(prereq_str.group(1))
+
+            else:
+                prereq_str = unit
+                print(prereq_str)
+
+
+        #prereq_str.toString()
+
+        #print(prereq_str)
+
+        #prereqs = []
+        #if
+
+
+
+
 
 
 
 #uos_list = [('INFO1110',[],[]),('COMP2123',['INFO1105','INFO1905'],['INFO1110']),('ISYS2120',["INFO2120","INFO2820","COMP5138"],["INFO1113"]),('INFO3333',[],['INFO1111'])]
 #create_json(uos_list)
 
-stripper(["COMP3308Introduction to Artificial Intelligence \n12 \xa0\xa0\n A Algorithms. Programming skills (e.g. Java, Python, C, C++, Matlab)  N COMP3608 \n\nSemester 1"])
+stripper(["COMP3308Introduction to Artificial Intelligence \n6 \xa0\xa0\n P Algorithms. Programming skills (e.g. Java, Python, C, C++, Matlab) INFO1110 N COMP3608 \n\nSemester 1"])
