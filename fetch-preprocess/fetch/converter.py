@@ -61,14 +61,15 @@ def stripper(junk_list):
 
 
         if " P " in unit:
-            if " N " in unit:
-                prereq_str = re.search(' P (.*) N', unit)
+
+            if " C " in unit:
+                prereq_str = re.search(' P (.*) C', unit)
+                #print(prereq_str.group(1))
                 prereqs = re.findall(r"([A-Z]{4}[0-9]{4})", prereq_str.group(1))
                 #print("prereq: ",prereqs)
 
-            elif " C " in unit:
-                prereq_str = re.search(' P (.*) C', unit)
-                #print(prereq_str.group(1))
+            elif " N " in unit:
+                prereq_str = re.search(' P (.*) N', unit)
                 prereqs = re.findall(r"([A-Z]{4}[0-9]{4})", prereq_str.group(1))
                 #print("prereq: ",prereqs)
 
@@ -82,33 +83,33 @@ def stripper(junk_list):
             prereqs = []
 
         #get prohibitions
-        if " N " in unit:
+        if " C " in unit:
 
-            x = unit.split(" N ")
+            x = unit.split(" C ")
 
-            if " C " in x[1]:
-                y = " N " + x[1]
-                prohibition_str = re.search(' N (.*) C', y)
-                prohibitions = re.findall(r"([A-Z]{4}[0-9]{4})", prohibition_str.group(1))
-                #print("prohib: ", prohibitions)
+            if " N " in x[1]:
+                y = " C " + x[1]
+                coreq_str = re.search(' C (.*) N', y)
+                coreq = re.findall(r"([A-Z]{4}[0-9]{4})", coreq_str.group(1))
+                #print("coreq: ", coreq)
 
 
             else:
-                prohibition_str = x[1]
-                prohibitions = re.findall(r"([A-Z]{4}[0-9]{4})", x[1])
-                #print("prohib: ", prohibitions)
-
-        else:
-            prohibitions = []
-
-        if " C " in unit:
-
-            final_split = unit.split(" C ")
-            coreq = re.findall(r"([A-Z]{4}[0-9]{4})", final_split[1])
-            #print("coreq: ", coreq)
+                coreq_str = x[1]
+                coreq = re.findall(r"([A-Z]{4}[0-9]{4})", x[1])
+                #print("coreq: ", coreq)
 
         else:
             coreq = []
+
+        if " N " in unit:
+
+            final_split = unit.split(" N ")
+            prohibitions = re.findall(r"([A-Z]{4}[0-9]{4})", final_split[1])
+            #print("prohibitions: ", prohibitions)
+
+        else:
+            prohibitions = []
 
 
         uos.append(uos_code)
@@ -128,4 +129,4 @@ def stripper(junk_list):
 #uos_list = [('INFO1110',[],[]),('COMP2123',['INFO1105','INFO1905'],['INFO1110']),('ISYS2120',["INFO2120","INFO2820","COMP5138"],["INFO1113"]),('INFO3333',[],['INFO1111'])]
 #create_json(uos_list)
 
-#stripper(['COMP3308Introduction to Artificial Intelligence \n6 \xa0\xa0\n P Algorithms. Programming skills (e.g. Java, Python, C, C++, Matlab) INFO1110, COMP2123 N COMP3608 \n\n Semester 1 C INFO3933', 'DATA3888Data Science Capstone \n6 \xa0\xa0\n P DATA2001 or DATA2901 or DATA2002 or DATA2902 or STAT2912 or STAT2012 \n\nSemester 2','INFO4001 Thesis A and INFO4002 Thesis B will be available from 2020.'])
+#stripper(['COMP2017 \n6 P  INFO1113 OR INFO1105 OR INFO1905 OR INFO1103 C COMP2123 OR COMP2823 OR INFO1105 OR INFO1905 N  COMP2129 '])
