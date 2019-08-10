@@ -15,6 +15,7 @@
 
     <link href="libraries/fontawesome-free-5.10.1-web/css/all.min.css" rel="stylesheet">
     <script defer src="libraries/fontawesome-free-5.10.1-web/js/all.min.js"></script>
+    <link href="libraries/sweetalert2.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/checkbox.css">
@@ -85,9 +86,10 @@
                     </h4>
                 </div>
                 <div class="right_buttons_div">
-                    <button type="button" class="btn btn-secondary right_buttons">Primary</button>
-                    <button type="button" class="btn btn-secondary right_buttons">Primary</button>
-                    <button type="button" class="btn btn-secondary right_buttons">Primary</button>
+                    <button type="button" class="btn btn-secondary right_buttons" onclick=units_can_do()>Units you can
+                        do</button>
+                    <button type="button" class="btn btn-secondary right_buttons" onclick=how_to_take_unit()>How to take
+                        a unit</button>
                 </div>
 
             </div>
@@ -104,76 +106,10 @@
                         </div>
                         <div class="card-body">
                             <div class="checkbox_container">
+                                <p style="padding: 0px 25px; padding-top: 10px;">Select the units you have completed:
+                                </p>
                                 <ul class="ks-cboxtags">
-                                    <li><input type="checkbox" id="checkboxOne" value="Rainbow Dash"><label
-                                            for="checkboxOne">INFO1110</label></li>
-                                    <li><input type="checkbox" id="checkboxTwo" value="Cotton Candy" checked><label
-                                            for="checkboxTwo">COMP3027</label></li>
-                                    <li><input type="checkbox" id="checkboxThree" value="Rarity" checked><label
-                                            for="checkboxThree">INFO1105</label></li>
-                                    <li><input type="checkbox" id="checkboxFour" value="Moondancer"><label
-                                            for="checkboxFour">INFO1113</label></li>
-                                    <li><input type="checkbox" id="checkboxOne" value="Rainbow Dash"><label
-                                            for="checkboxOne">INFO1110</label></li>
-                                    <li><input type="checkbox" id="checkboxTwo" value="Cotton Candy" checked><label
-                                            for="checkboxTwo">COMP3027</label></li>
-                                    <li><input type="checkbox" id="checkboxThree" value="Rarity" checked><label
-                                            for="checkboxThree">INFO1105</label></li>
-                                    <li><input type="checkbox" id="checkboxFour" value="Moondancer"><label
-                                            for="checkboxFour">INFO1113</label></li>
-                                    <li><input type="checkbox" id="checkboxOne" value="Rainbow Dash"><label
-                                            for="checkboxOne">INFO1110</label></li>
-                                    <li><input type="checkbox" id="checkboxTwo" value="Cotton Candy" checked><label
-                                            for="checkboxTwo">COMP3027</label></li>
-                                    <li><input type="checkbox" id="checkboxThree" value="Rarity" checked><label
-                                            for="checkboxThree">INFO1105</label></li>
-                                    <li><input type="checkbox" id="checkboxFour" value="Moondancer"><label
-                                            for="checkboxFour">INFO1113</label></li>
-                                    <li><input type="checkbox" id="checkboxTwo" value="Cotton Candy" checked><label
-                                            for="checkboxTwo">COMP3027</label></li>
-                                    <li><input type="checkbox" id="checkboxThree" value="Rarity" checked><label
-                                            for="checkboxThree">INFO1105</label></li>
-                                    <li><input type="checkbox" id="checkboxFour" value="Moondancer"><label
-                                            for="checkboxFour">INFO1113</label></li>
-                                    <li><input type="checkbox" id="checkboxOne" value="Rainbow Dash"><label
-                                            for="checkboxOne">INFO1110</label></li>
-                                    <li><input type="checkbox" id="checkboxTwo" value="Cotton Candy" checked><label
-                                            for="checkboxTwo">COMP3027</label></li>
-                                    <li><input type="checkbox" id="checkboxThree" value="Rarity" checked><label
-                                            for="checkboxThree">INFO1105</label></li>
-                                    <li><input type="checkbox" id="checkboxFour" value="Moondancer"><label
-                                            for="checkboxFour">INFO1113</label></li>
-                                    <li><input type="checkbox" id="checkboxTwo" value="Cotton Candy" checked><label
-                                            for="checkboxTwo">COMP3027</label></li>
-                                    <li><input type="checkbox" id="checkboxThree" value="Rarity" checked><label
-                                            for="checkboxThree">INFO1105</label></li>
-                                    <li><input type="checkbox" id="checkboxFour" value="Moondancer"><label
-                                            for="checkboxFour">INFO1113</label></li>
-                                    <li><input type="checkbox" id="checkboxOne" value="Rainbow Dash"><label
-                                            for="checkboxOne">INFO1110</label></li>
-                                    <li><input type="checkbox" id="checkboxTwo" value="Cotton Candy" checked><label
-                                            for="checkboxTwo">COMP3027</label></li>
-                                    <li><input type="checkbox" id="checkboxThree" value="Rarity" checked><label
-                                            for="checkboxThree">INFO1105</label></li>
-                                    <li><input type="checkbox" id="checkboxFour" value="Moondancer"><label
-                                            for="checkboxFour">INFO1113</label></li>
-                                    <li><input type="checkbox" id="checkboxTwo" value="Cotton Candy" checked><label
-                                            for="checkboxTwo">COMP3027</label></li>
-                                    <li><input type="checkbox" id="checkboxThree" value="Rarity" checked><label
-                                            for="checkboxThree">INFO1105</label></li>
-                                    <li><input type="checkbox" id="checkboxFour" value="Moondancer"><label
-                                            for="checkboxFour">INFO1113</label></li>
-                                    <li><input type="checkbox" id="checkboxOne" value="Rainbow Dash"><label
-                                            for="checkboxOne">INFO1110</label></li>
-                                    <li><input type="checkbox" id="checkboxTwo" value="Cotton Candy" checked><label
-                                            for="checkboxTwo">COMP3027</label></li>
-                                    <li><input type="checkbox" id="checkboxThree" value="Rarity" checked><label
-                                            for="checkboxThree">INFO1105</label></li>
-                                    <li><input type="checkbox" id="checkboxFour" value="Moondancer"><label
-                                            for="checkboxFour">INFO1113</label></li>
-
-
-
+                                    Loading...
                                 </ul>
                             </div>
                         </div>
@@ -210,10 +146,17 @@
         crossorigin="anonymous"></script>
 
 
+    <script src="libraries/sweetalert2.all.min.js"></script>
+
+
     <script src="libraries/axios.min.js"></script>
 
     <script src="libraries/cytoscape.min.js"></script>
+    <script src="libraries/0.7.4_dist_dagre.js"></script>
+    <script src="libraries/cytoscape-dagre.js"></script>
 
+    <script src="js/listeners.js"></script>
+    <script src="js/lots_of_data.js"></script>
     <script src="js/index.js"></script>
 </body>
 

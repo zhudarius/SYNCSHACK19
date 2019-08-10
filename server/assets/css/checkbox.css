@@ -8,7 +8,9 @@
 
 ul.ks-cboxtags {
     list-style: none;
-    padding: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
 }
 ul.ks-cboxtags li{
 /* display: inline; */
