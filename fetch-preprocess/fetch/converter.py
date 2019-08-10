@@ -53,7 +53,7 @@ def stripper(junk_list):
         #get uos_code
         uos_code = unit[:8]
         #print("uos_code:",uos_code)
-        if uos_code == "DATA2002" or uos_code == "DATA2902" or uos_code == "DATA2901" or uos_code == "COMP3608" or uos_code == "ISYS3402" or uos_code == "INFO2222" or uos_code == "SOFT3888" or uos_code == "COMP5338" or uos_code == "INFO6010":
+        if uos_code == "DATA2002" or uos_code == "DATA2902" or uos_code == "DATA2901" or uos_code == "COMP3608" or uos_code == "ISYS3402" or uos_code == "INFO2222" or uos_code == "SOFT3888" or uos_code == "COMP5338" or uos_code == "INFO6010" or uos_code == "ELEC5514":
             continue
 
         #get credit points
