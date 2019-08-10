@@ -1,5 +1,6 @@
 import json
 import re
+from parsetree import *
 
 #each element of the input list is (uos_code,[prohibitions],[prereqs])
 def create_json(uos_list):
@@ -23,7 +24,7 @@ def create_json(uos_list):
 #grabs list of strings consisting of unit code, 'and', 'or'
 def and_or_trigger(str_lst):
 
-    i=0
+    i = 0
     while i < len(str_lst):
         if str_lst[i] == " AND " or str_lst[i] == " and ":
             str_lst[i] = "&"
@@ -33,8 +34,8 @@ def and_or_trigger(str_lst):
 
     separator = ''
     inp = separator.join(str_lst)
-    print(inp)
-    temp_lst.append(inp)
+    out = generateParseTree(inp)
+    return out
 
 
 
@@ -86,23 +87,23 @@ def stripper(junk_list):
                 #print(prereq_str.group(1))
                 prereqs = re.findall(r"[A-Z]{4}[0-9]{4}| AND | OR |\(|\)| and | or ", prereq_str.group(1))
                 #print("prereq: ",prereqs)
-                and_or_trigger(prereqs)
+                preq = and_or_trigger(prereqs)
 
             elif " N " in unit:
                 prereq_str = re.search(' P (.*) N ', unit)
                 prereqs = re.findall(r"[A-Z]{4}[0-9]{4}| AND | OR |\(|\)| and | or ", prereq_str.group(1))
                 #print("prereq: ",prereqs)
-                and_or_trigger(prereqs)
+                preq = and_or_trigger(prereqs)
 
             else:
                 prereq_str = unit
                 #print(prereq_str)
                 prereqs = re.findall(r"[A-Z]{4}[0-9]{4}| AND | OR |\(|\)| and | or ", prereq_str)
                 #print("prereq: ",prereqs)
-                and_or_trigger(prereqs)
+                preq = and_or_trigger(prereqs)
 
         else:
-            prereqs = []
+            preq = []
 
         #get prohibitions
         if " C " in unit:
@@ -114,17 +115,17 @@ def stripper(junk_list):
                 coreq_str = re.search(' C (.*) N ', y)
                 coreq = re.findall(r"[A-Z]{4}[0-9]{4}| AND | OR |\(|\)| and | or ", coreq_str.group(1))
                 #print("coreq: ", coreq)
-                and_or_trigger(coreq)
+                coreqq = and_or_trigger(coreq)
 
 
             else:
                 coreq_str = x[1]
                 coreq = re.findall(r"[A-Z]{4}[0-9]{4}| AND | OR |\(|\)| and | or ", x[1])
                 #print("coreq: ", coreq)
-                and_or_trigger(coreq)
+                coreqq = and_or_trigger(coreq)
 
         else:
-            coreq = []
+            coreqq = []
 
         if " N " in unit:
 
@@ -138,14 +139,13 @@ def stripper(junk_list):
 
         uos.append(uos_code)
         uos.append(cp)
-        uos.append(prereqs)
+        uos.append(preq)
         uos.append(prohibitions)
-        uos.append(coreq)
+        uos.append(coreqq)
 
         uos_list.append(uos)
 
     create_json(uos_list)
-    print(temp_lst)
 
 
 
