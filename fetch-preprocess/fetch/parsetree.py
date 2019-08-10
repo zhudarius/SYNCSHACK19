@@ -3,9 +3,9 @@
 #  nor 3)
 from logicparser import *
 def generateParseTree(expression):
-    
+
     tree, vars_order = parse(expression)
-    print(tree)
+    #print(tree)
     return tree
 
-generateParseTree('(COMP2123|COMP2823)&COMP2017&(COMP2022|COMP2922)')
+#generateParseTree('(COMP2123|COMP2823)&COMP2017&(COMP2022|COMP2922)')
