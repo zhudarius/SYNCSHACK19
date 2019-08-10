@@ -25,7 +25,7 @@ class Dependency:
         self.sufficient_for = []
 
     def add_children(self, logic, child_1, child_2):
-        self.logic = logic
+        self.logic = "and" if logic == "&" else "or"
         self.children = (child_1, child_2)
         self.children_id = (child_1.id, child_2.id)
 

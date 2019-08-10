@@ -136,7 +136,7 @@ def send_necessary():
     return calculate_necessary(courses, target), 200
 
 if __name__ == "__main__":
-    server = True
+    server = False
 
     if server:
         app.run(debug=True, port=5000, host='0.0.0.0')
