@@ -108,3 +108,12 @@ def stripper(junk_list):
         uos_list.append(uos)
 
     create_json(uos_list)
+
+
+
+
+
+#uos_list = [('INFO1110',[],[]),('COMP2123',['INFO1105','INFO1905'],['INFO1110']),('ISYS2120',["INFO2120","INFO2820","COMP5138"],["INFO1113"]),('INFO3333',[],['INFO1111'])]
+#create_json(uos_list)
+
+stripper(['COMP3308Introduction to Artificial Intelligence \n6 \xa0\xa0\n P Algorithms. Programming skills (e.g. Java, Python, C, C++, Matlab) INFO1110, COMP2123 N COMP3608 \n\n Semester 1 C INFO3933', 'DATA3888Data Science Capstone \n6 \xa0\xa0\n P DATA2001 or DATA2901 or DATA2002 or DATA2902 or STAT2912 or STAT2012 \n\nSemester 2'])
