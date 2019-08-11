@@ -8,6 +8,10 @@ router.get('/', function (req, res) {
     res.render('index');
 });
 
+router.get('/test', function (req, res) {
+    res.render('test');
+});
+
 router.get('/get_test_data', (req, res) => {
     Processed.find({})
         .exec()

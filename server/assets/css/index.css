@@ -6,9 +6,36 @@ html, body {
 
 body {
     /* min-height: 75rem; */
-    padding-top: 4.5rem; 
+    padding-top: 56px; 
 }
-  
+
+/* nav div svg {
+    padding-left: 5px;
+} */
+
+.card {
+    height: 100%;
+    max-width: 220px;
+}
+.checkbox_container {
+    /* max-height: 350px; */
+    height: 100%;
+}
+
+.checkbox_container ul {
+    overflow: scroll;
+    margin: 0;
+    max-height: 100%;
+    height: 100%;
+}
+.checkbox_container ul input{
+    display: none;
+}
+    
+.navbar_icon {
+    color: white
+}
+
 .container {
     display: flex; /* or inline-flex */
 }
@@ -36,17 +63,17 @@ body {
 .avatar_wrapper {
     border-radius: 3rem;
 
-    max-height: 200px;
-    max-width: 200px;
+    max-height: 150px;
+    max-width: 150px;
 
-    background: rgb(149, 136, 138);
+    background: rgb(211, 211, 211);
 
     margin: 1rem;
     padding: 1rem;
 }
 
 .top_row_middle_space {
-    background: rgb(214, 214, 214); 
+    /* background: rgb(214, 214, 214);  */
     flex-grow: 2;
     display: flex; 
     flex-direction: column;
@@ -55,7 +82,7 @@ body {
 }
 
 .right_buttons_div {
-    background: rgb(194, 194, 194); 
+    /* background: rgb(194, 194, 194);  */
     flex-direction: column; 
     display: flex; 
     justify-content: center;
@@ -77,8 +104,8 @@ body {
 
 
 .bottom_row {
-    border: 1px solid red;
-    background: rgb(212, 214, 216);
+    /* border: 1px solid red; */
+    /* background: rgb(212, 214, 216); */
     padding: 1rem;
 
     height: 100%;
@@ -87,26 +114,53 @@ body {
 }
 
 .units_scroll {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     min-width: 200px;
+    padding: 0 1em;
+}
+
+.card-body {
+    padding: 0;
 }
 
 #cy {
     height: 100%;
     width: 100%;
     position: absolute;
+    /* background: rgb(230, 230, 230) */
+    background: rgb(255, 255, 255);
+    border: 3px solid gray;
+    border-radius: 15px;
+    /* padding: 5px; */
+
 }
 
 #graph_div {
     flex: 1;
-    background: rgb(226, 137, 137);
+    /* background: rgb(226, 137, 137); */
     position: relative;
 }
 
 .full_screen_graph {
-    position: absolute; 
-    top: 0; 
+    position: absolute !important; 
+    top: 56px; 
     right: 0; 
     bottom: 0; 
     left: 0;
+}
+
+
+
+
+
+#user_name {
+    font-family: 'Lexend Exa', sans-serif;
+    margin-bottom: 0.7rem;
+}
+
+.user_details {
+    font-family: 'Barlow', sans-serif;
+    padding-left: 0.7rem;
+    margin-bottom: 0rem;
+
 }
