@@ -19,9 +19,11 @@
 
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/checkbox.css">
+    <link rel="stylesheet" href="css/chatbot.css">
 
 
     <!--load all styles -->
+
 
 
     <title>Hello, world!</title>
@@ -30,10 +32,13 @@
 <body>
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">&lt;Uni Logo&gt;</a>
+        <a class="navbar-brand" href="#">
+            <img src="logo.jpg" width="108" height="30" alt="" style="display:inline">
+        </a>
+        <!-- <a class="navbar-brand" href="#">&lt;Uni Logo&gt;</a>
         <span class="navbar-text">
             Course Viewer
-        </span>
+        </span> -->
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -122,6 +127,10 @@
                 <div id=graph_div>
                     <button onClick=full_screen() class="d-inline" style="position: absolute; z-index:10">Full
                         Screen</button>
+
+                    <p id="course_map" class="display-4 d-inline" style="position: absolute; z-index:10;">Course
+                        Map</p>
+
                     <div id="cy" style="z-index: 1">
 
                     </div>
@@ -132,7 +141,19 @@
 
     </div>
 
+    <div class="chat-box">
+        <input type="checkbox" />
+        <label data-expanded="Close Chatbox" data-collapsed="Open Chatbox"></label>
+        <div class="chat-box-content">
+            <ul class="chat-box-ul">
+                <li class="chat_message their_message">
+                    Hello! Please type in a unit code to see whether you can take it.
+                </li>
+            </ul>
 
+            <input type="text" class="chatbot_input" placeholder="Enter a unit code">
+        </div>
+    </div>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="libraries/jquery-3.3.1.slim.min.js"
@@ -155,6 +176,7 @@
     <script src="libraries/0.7.4_dist_dagre.js"></script>
     <script src="libraries/cytoscape-dagre.js"></script>
 
+    <script src="js/chatbot.js"></script>
     <script src="js/listeners.js"></script>
     <script src="js/lots_of_data.js"></script>
     <script src="js/index.js"></script>

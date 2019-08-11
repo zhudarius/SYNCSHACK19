@@ -83,11 +83,9 @@ function full_screen(e) {
 
 
 function initialise_units_list(data) {
-    console.log("A");
     if (!data) {
         return;
     }
-    console.log("AA");
     var str = "";
 
     var dataCopy = Object.assign({}, data);
@@ -104,12 +102,20 @@ function initialise_units_list(data) {
         return 0;
     }); //a.display/*.slice(4)*/ - b.display/*.slice(4)*/)
 
-
+    var lastUnitCodeCategory;
     var i = 0;
     for (var n of dataCopy.nodes) {
+        if (lastUnitCodeCategory !== n.display.slice(0, 4) && lastUnitCodeCategory !== undefined) {
+            str += `<hr>`;
+        }
+
         str += `<li><input type="checkbox" id="checkbox${i}" value="${n.display}"><label
         for="checkbox${i}">${n.display}</label></li>`;
         i += 1;
+
+
+        lastUnitCodeCategory = n.display.slice(0, 4);
+        console.log(lastUnitCodeCategory)
     }
 
     $(".ks-cboxtags")[0].innerHTML = str;
