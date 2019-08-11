@@ -12,6 +12,11 @@ $(document).ready(() => {
         initialise_graph(graph_data);
     });
 
+    $("#course_map").css("left", $("#cy").width() / 2);
+    $("#course_map").css("transform", "translateX(-50%)");
+    $("#course_map").css("transform", "translateY(25px)");
+
+
     load_data(graph_data);
 });
 

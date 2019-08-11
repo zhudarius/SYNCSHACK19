@@ -63,8 +63,8 @@ body {
 .avatar_wrapper {
     border-radius: 3rem;
 
-    max-height: 200px;
-    max-width: 200px;
+    max-height: 150px;
+    max-width: 150px;
 
     background: rgb(211, 211, 211);
 
@@ -128,7 +128,11 @@ body {
     width: 100%;
     position: absolute;
     /* background: rgb(230, 230, 230) */
-    background: rgb(255, 255, 255)
+    background: rgb(255, 255, 255);
+    border: 3px solid gray;
+    border-radius: 15px;
+    /* padding: 5px; */
+
 }
 
 #graph_div {
