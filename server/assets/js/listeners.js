@@ -32,7 +32,7 @@ function units_can_do() {
 
             Swal.fire({
                 title: 'Data: ',
-                text: res.data
+                text: JSON.stringify(res.data)
             })
             console.log(res.data);
 
